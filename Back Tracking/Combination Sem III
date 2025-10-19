@@ -1,0 +1,40 @@
+Problrm: 216 : combination sum III
+
+// problem link :   https://leetcode.com/problems/combination-sum-iii/?envType=study-plan-v2&envId=leetcode-75
+
+
+ class Solution {
+public:
+void solve(int &k, int &n,unordered_map<int,bool>&visited,vector<vector<int>>&ans,int sum,int N,vector<int>temp){
+            
+            if(sum>=n||N>9){
+        
+                if(sum==n&& temp.size()==k)  ans.push_back(temp);
+                return;
+            }
+
+         //  cout<<sum<<" ";
+            if(!visited[N]){
+                visited[N]=true;
+                temp.push_back(N);
+                solve(k,n,visited,ans,sum+N,N+1,temp);
+                   visited[N]=false;
+                   temp.pop_back();
+            }
+            //excluded case 
+           solve(k,n,visited,ans,sum,N+1,temp);
+           
+}
+        vector<vector<int>> combinationSum3(int k, int n) {
+        vector<vector<int>>ans;
+        vector<int>temp;
+        unordered_map<int,bool>visited;
+        int N=1;
+        // recursively
+
+       
+        solve(k,n,visited,ans,0,N,temp);
+
+          return ans;
+    }
+};
