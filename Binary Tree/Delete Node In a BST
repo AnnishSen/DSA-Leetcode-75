@@ -1,0 +1,60 @@
+
+// Problrm :  450
+
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+ public:
+ int searchSmallest(TreeNode*& root, int &s) {
+     if (root->left == NULL) {
+          s = root->val;
+           TreeNode*temp=root;
+         root=root->right;
+         delete temp;
+          return s;
+     }      return searchSmallest(root->left,s);
+ }
+ void solve(TreeNode*& root, int key) {
+    if (root == NULL){
+           return;
+     } 
+       if (root->val == key) {
+         if(!root->right&&!root->left){
+              delete root;
+             root=NULL;
+         }else if (root->right) {
+             if(root->right->left==NULL){
+                root->val=root->right->val;
+                 TreeNode* temp = root->right;
+                 root->right=root->right->right;
+                 delete temp;
+             }else{
+                  int s = 0;
+                 searchSmallest(root->right,s);
+                  root->val = s;
+             }
+         }else{
+            TreeNode*temp=root;
+            root=root->left;
+            delete temp;
+         }
+         return;
+     }
+     solve(root->left, key);
+     solve(root->right, key);
+ } 
+TreeNode* deleteNode(TreeNode* root, int key) {
+        solve(root, key);
+         return root;
+}
+ };
