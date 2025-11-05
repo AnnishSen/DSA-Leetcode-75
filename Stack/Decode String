@@ -1,0 +1,104 @@
+// problem 394 : decode string
+
+// problem link : https://leetcode.com/problems/decode-string/?envType=study-plan-v2&envId=leetcode-75
+
+
+class Solution {
+public:
+
+   string decodeString(string s){
+
+
+    /*
+    // chat gpt solution
+        stack<int> NumberStack;
+        stack<string> StringStack;
+        int k = 0;
+
+        for (char c : s) {
+            if (isdigit(c)) {
+                k = k * 10 + (c - '0'); // build multi-digit number
+                continue;
+            }
+
+            if (c == '[') {
+                NumberStack.push(k);
+                k = 0;
+                StringStack.push("[");
+                continue;
+            }
+
+            if (c != ']') {
+                StringStack.push(string(1, c)); // push individual characters as strings
+                continue;
+            }
+
+            // Pop characters till we find '['
+            string temp = "";
+            while (StringStack.top() != "[") {
+                temp = StringStack.top() + temp;
+                StringStack.pop();
+            }
+
+            // Remove the "["
+            StringStack.pop();
+
+            // Repeat the string
+            string replacement = "";
+            int count = NumberStack.top(); NumberStack.pop();
+            for (int i = 0; i < count; i++)
+                replacement += temp;
+
+            // Push the repeated string back
+            StringStack.push(replacement);
+        }
+
+        // Build the final result
+        string result = "";
+        while (!StringStack.empty()) {
+            result = StringStack.top() + result;
+            StringStack.pop();
+        }
+        return result;
+        */
+
+        stack<string>ss;
+        stack<int>sn;
+int n=0;
+        for(int i=0;i<s.size();i++){
+            if(isdigit(s[i])){
+            n=n*10 + (s[i]-'0');
+                continue;
+            }
+                if(s[i]=='['){
+                    sn.push(n);
+                    n=0;
+                    ss.push("[");
+                    continue;
+                }
+                if (s[i] != ']') {
+                ss.push(string(1,s[i]));
+                continue;
+            }
+                string temp="";
+              while (ss.top() != "[") {
+                temp =ss.top()+temp;
+                ss.pop();
+            }
+               ss.pop();
+ string temp1="";
+ int k=sn.top();
+  sn.pop();
+            for(int i=0;i<k;i++) {
+                temp1+=temp;
+            }
+             ss.push(temp1);
+        }
+   string ans="";
+        while(!ss.empty()){
+            ans =ss.top()+ans;
+            ss.pop();
+        }
+        return ans;
+    }
+};
