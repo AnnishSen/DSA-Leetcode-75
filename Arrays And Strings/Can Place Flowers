@@ -1,0 +1,32 @@
+
+
+
+// problem: 695
+// Problem link: https://leetcode.com/problems/can-place-flowers/?envType=study-plan-v2&envId=leetcode-75
+
+class Solution {
+public:
+    bool canPlaceFlowers(vector<int>& flowerbed, int n) {
+         int count=0, pre=0, next=0,i=0;
+        while(i<flowerbed.size())  {
+                     if(i==flowerbed.size()-1)   {
+                        next=0;
+                     }else {
+                       next=flowerbed[i+1];
+                     }
+                     if(i>0) pre=flowerbed[i-1];
+                if(flowerbed[i]!=1&&(pre==0&&next==0))  {
+                    count++;
+                    i+=2;
+                }else{
+                    i++;
+            }
+        }
+        if(count>=n) {
+         return true;
+        } 
+        else{
+           return false;
+        }
+    }
+};
