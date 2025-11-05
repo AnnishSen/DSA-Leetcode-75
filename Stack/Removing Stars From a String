@@ -1,0 +1,27 @@
+// Problem 2390 : removing stars from a string
+
+// problem link: https://leetcode.com/problems/removing-stars-from-a-string/?envType=study-plan-v2&envId=leetcode-75
+
+
+
+class Solution {
+public:
+    string removeStars(string s) {
+       int l=s.size();
+        string st="";
+        int top=-1;
+        for(int i=0;i<l;i++)
+        {
+            st.push_back(s[i]);
+            top++;
+            if(st[top]=='*')
+            {
+                st.pop_back();
+                st.pop_back();
+              top=top-2;
+            }
+        }
+        
+        return st;
+    }
+};
