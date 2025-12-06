@@ -1,0 +1,28 @@
+// problem: 452.Minimum number of arrows to brust ballons
+
+
+// problem link: https://leetcode.com/problems/minimum-number-of-arrows-to-burst-balloons/?envType=study-plan-v2&envId=leetcode-75
+
+class Solution {
+public:
+    int findMinArrowShots(vector<vector<int>>& points) {
+
+        sort(points.begin(), points.end());
+
+        int total = points.size();
+        int up = points[0][1];
+
+        for (int i = 1; i < points.size(); i++) {
+
+            if (points[i][0] <= up) {
+                total--;
+                up = min(up, points[i][1]);
+            } else {
+
+                up = points[i][1];
+            }
+        }
+
+        return total;
+    }
+};
