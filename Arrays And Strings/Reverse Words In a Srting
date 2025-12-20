@@ -1,0 +1,41 @@
+
+//http://leetcode.com/problems/reverse-words-in-a-string/?envType=study-plan-v2&envId=leetcode-75
+
+
+class Solution {
+public:
+    string reverseWords(string s) {
+
+        bool space = true;
+        string ans = "";
+        for (int i = 0; i < s.size(); i++) {
+
+            if ((s[i] == ' ') && !space) {
+                ans.push_back(s[i]);
+                space = true;
+
+            } else if (s[i] != ' ') {
+                ans.push_back(s[i]);
+                space = false;
+            }
+        }
+        if (ans[ans.size() - 1] == ' ') {
+            ans.pop_back();
+        }
+        reverse(ans.begin(), ans.end());
+
+        int i = 0, j = 0;
+        while (j < ans.size()) {
+
+            if (ans[j] == ' ') {
+                reverse(ans.begin() + i, ans.begin() + j);
+                i = j + 1;
+            }
+
+            j++;
+        }
+        reverse(ans.begin() + i, ans.begin() + j);
+
+        return ans;
+    }
+};
