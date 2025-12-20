@@ -1,0 +1,84 @@
+
+
+class Solution {
+public:
+    int compress(vector<char>& chars) {
+        string s = "";
+        int l = 1;
+        int i;
+        for (i = 0; i < chars.size() - 1; i++) {
+            if (chars[i] == chars[i + 1]) {
+                l++;
+            } else {
+                s.push_back(chars[i]);
+                int l1 = l, d = 0, l2 = l;
+                while (l2 > 0) {
+                    d++;
+                    l2 = l2 / 10;
+                }
+                while (d > 0 && l1 > 1) {
+                    int r = l / pow(10, d - 1);
+                    s.push_back(r + '0');
+                    l = l % (int)pow(10, d - 1);
+                    d--;
+                }
+                l = 1;
+            }
+        }
+        s.push_back(chars[i]);
+        int l1 = l;
+        int d = 0;
+        int l2 = l;
+        while (l2 > 0) {
+            d++;
+            l2 = l2 / 10;
+        }
+        while (d > 0 && l1 > 1) {
+            int r = l / pow(10, d - 1);
+            s.push_back(r + '0');
+            l = l % (int)pow(10, d - 1);
+            d--;
+        }
+        chars.clear();
+        for (int j = 0; j < s.size(); j++) {
+            chars.push_back(s[j]);
+        }
+        return s.size();
+    }
+};
+
+// class Solution {
+// public:
+//     int compress(vector<char>& chars) {
+//          int i=0;
+//         int ansIndex=0;
+//         int n= chars.size();
+//         while(i<n)
+//         {
+//             int j=i+1;
+//             while(j<n && chars[i]==chars[j])
+//             {
+//                 j++;
+//             }
+//             //yaha kb aoou gy
+//             //ya pura vecetor transverse kr dya
+//             //ya nya character encounter kr dya
+
+//             //now oldChar store kr lo
+//             chars[ansIndex++]=chars[i];
+//             int count=j-i;
+//             if(count>1)
+//             {
+//                 //converting counting into single digit and saving it
+//                 string cnt=to_string(count);
+//                 for(char ch :cnt)
+//                 {
+//                     chars[ansIndex++]=ch;
+//                 }
+//             }
+//             //moving to new/different character
+//             i=j;
+//         }
+//      return ansIndex ;
+//     }
+// };
