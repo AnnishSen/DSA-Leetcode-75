@@ -1,0 +1,27 @@
+
+
+// problem 338 : Counting bits
+// link : https://leetcode.com/problems/counting-bits/description/?envType=study-plan-v2&envId=leetcode-75
+
+
+class Solution {
+public:
+    vector<int> countBits(int n) {
+        vector<int>ans;
+for(int i=0;i<=n;i++)
+{
+      int   t=i;
+        int cnt=0;
+      while(t!=0)
+      {
+        if(t%2==1)cnt++;
+
+        t=t/2;
+      }
+
+      ans.push_back(cnt);
+}
+        return ans;
+
+    }
+};
