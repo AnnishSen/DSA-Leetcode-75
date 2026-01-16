@@ -1,0 +1,49 @@
+
+
+// Problem  : Minimum flips to make a OR b equal to c
+
+// link : https://leetcode.com/problems/minimum-flips-to-make-a-or-b-equal-to-c/description/?envType=study-plan-v2&envId=leetcode-75
+
+
+
+class Solution {
+public:
+vector<int> binary(int n){
+    vector<int> v;
+    int i=0;
+    while(n>0){
+        i++;
+        v.push_back(n%2);
+        n=n/2;
+    }
+    while(i<30){
+        v.push_back(0);
+        i++;
+    }
+    reverse(v.begin(),v.end());
+return v;
+}
+    int minFlips(int a, int b, int c) {
+        int flip=0;
+       vector<int> v1= binary(a), v2= binary(b),v3= binary(c);
+        for(int i=0;i<30;i++){
+                
+                if(v1[i]==v2[i]){
+
+                   if(v1[i]==1&&v3[i]==0)
+                   {
+                    flip+=2;
+                   }else if(v1[i]==0&&v3[i]==1){
+                    flip++;
+                   }
+                }
+                if(v1[i]!=v2[i]){
+                     
+                     if(v3[i]==0){
+                        flip++;
+                     }
+                }
+        }
+       return flip; 
+    }
+};
